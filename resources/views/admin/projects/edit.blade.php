@@ -20,6 +20,14 @@
       <label for="title" class="form-label">Title</label>
       <input type="text" class="form-control" id="title" name="title" value="{{ old('title', $project->title) }}">
     </div>
+    @foreach ($technologies as $technology)
+                        <input type="checkbox" name="technologies[]" class="form-check-input" id="technologies" value="{{ $technology->id }}" @if ($technology->technologies->contains($technology->id) )
+                         checked
+                         @endif>
+                        <label for="technologies" class="form-check-label me-3">
+                            {{ $technology->name }}
+                        </label>
+                    @endforeach
     <p>Type Project</p>
     <select class="form-select mb-3" aria-label="Default select example" name='type_id'>
       @foreach($types as $type)

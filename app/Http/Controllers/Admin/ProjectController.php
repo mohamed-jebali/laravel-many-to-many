@@ -32,7 +32,8 @@ class ProjectController extends Controller
     public function create()
     {
         $types = Type::all();
-        return view('admin.projects.create',compact('types'));
+        $technologies = Technology::all();
+        return view('admin.projects.create',compact('types','technologies'));
     }
 
     /**
@@ -53,6 +54,10 @@ class ProjectController extends Controller
         $newProject->slug = Str::of("$newProject->id " . $data['title'])->slug('-');
         $newProject->save();
 
+        if ($request->has('technologies')){
+            $newProject->technologies()->sync($request->technologies);
+        }
+
 
         return redirect()->route('admin.projects.index')->with('created', $newProject->title);
     }
@@ -63,8 +68,8 @@ class ProjectController extends Controller
     public function show(Project $project)
     {
         // dd($project);
-        $techologies = Technology::all();
-        return view ('admin.projects.show',compact('project','techologies'));
+        $technologies = Technology::all();
+        return view ('admin.projects.show',compact('project','technologies'));
     }
 
     /**
@@ -74,7 +79,8 @@ class ProjectController extends Controller
     {
         // @dd($project);
         $types = Type::all();
-        return view ('admin.projects.edit',compact('project','types'));
+        $technologies = Technology::all();
+        return view ('admin.projects.edit',compact('project','types','technologies'));
     }
 
     /**
@@ -93,6 +99,10 @@ class ProjectController extends Controller
         $data['slug'] = Str::of("$project->id " . $data['title'])->slug('-');
         $project->type_id = $request->input('type_id');
         $project->update($data);
+
+        if ($request->has('technologies')){
+            $project->technologies()->sync($request->technologies);
+        }
 
         return redirect()->route('admin.projects.index', compact('project'))->with('update',$project->title);
     }
@@ -125,6 +135,7 @@ class ProjectController extends Controller
         
         $project = Project::onlyTrashed()->findOrFail($slug);
         Storage::delete($project->image);
+        $project->technologies()->detach();
         $project->forceDelete();
 
         return redirect()->route('admin.projects.index')->with('removed',$project->title);

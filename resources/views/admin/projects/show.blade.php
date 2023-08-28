@@ -13,9 +13,11 @@
             <h5 class="card-title"><span class='fw-bold'>Type Name: </span> {{$project->type->name}}</h5>
             <h5 class="card-title"><span class='fw-bold'>ID:</span> {{$project->id}}</h5>
             <h6 class="card-title"><span class='fw-bold'>TECH:</span>
+            @if(count($project->technologies) > 0)
             @foreach($project->technologies as $technology)
-             {{$project->technology->name}}
+             {{$technology->name}}
              @endforeach
+             @endif
             </h6>
             <p class="card-text"><span class='fw-bold'>Title: </span>{{$project->title}}</p>
             <p class="card-text"><span class='fw-bold'>Slug: </span>{{$project->slug}}</p>
