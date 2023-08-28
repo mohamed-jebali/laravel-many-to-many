@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Models\Type;
+use App\Models\Technology;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProjectStoreRequest;
 use App\Http\Requests\ProjectUpdateRequest;
@@ -62,7 +63,8 @@ class ProjectController extends Controller
     public function show(Project $project)
     {
         // dd($project);
-        return view ('admin.projects.show',compact('project'));
+        $techologies = Technology::all();
+        return view ('admin.projects.show',compact('project','techologies'));
     }
 
     /**
