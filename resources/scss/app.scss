@@ -1,0 +1,11 @@
+@import "./bootstrap/scss/bootstrap";
+
+li{
+    list-style-type: none;
+}
+
+.hover-text-white:hover{
+    a{
+        color: white;
+    }
+}
