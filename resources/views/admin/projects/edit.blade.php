@@ -27,7 +27,7 @@
                         <label for="technologies" class="form-check-label me-3">
                             {{ $technology->name }}
                         </label>
-                    @endforeach
+   @endforeach
     <p>Type Project</p>
     <select class="form-select mb-3" aria-label="Default select example" name='type_id'>
       @foreach($types as $type)

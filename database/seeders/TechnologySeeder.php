@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Technology;
 
+
 class TechnologySeeder extends Seeder
 {
     /**
@@ -32,11 +33,13 @@ class TechnologySeeder extends Seeder
             ],
         ];
 
+
         foreach($technologies as $tecnology){
             $newTechology = new Technology;
             $newTechology->name = $tecnology['tecnology'];
             $newTechology->native_language = $tecnology['native_language'];
             $newTechology->save();
+
         }
     }
 }

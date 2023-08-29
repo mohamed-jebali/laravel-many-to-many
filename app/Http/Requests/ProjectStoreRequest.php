@@ -28,7 +28,7 @@ class ProjectStoreRequest extends FormRequest
             "slug" => "min:10|required",
             "image" => "required|image|mimes:jpeg,png,jpg,gif|max:2048",
             "type_id" => "required|exists:types,id" ,
-            "technologies" => 'exists:technology,id'
+            "technologies" => 'exists:technologies,id'
         ];
     }
 
