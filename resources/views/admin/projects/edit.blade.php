@@ -21,7 +21,7 @@
       <input type="text" class="form-control" id="title" name="title" value="{{ old('title', $project->title) }}">
     </div>
     @foreach ($technologies as $technology)
-                        <input type="checkbox" name="technologies[]" class="form-check-input" id="technologies" value="{{ $technology->id }}" @if ($technology->technologies->contains($technology->id) )
+                        <input type="checkbox" name="technologies[]" class="form-check-input" id="technologies" value="{{ $technology->id }}" @if ( $project->technologies->contains($technology->id) )
                          checked
                          @endif>
                         <label for="technologies" class="form-check-label me-3">
